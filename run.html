@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        body{
+            background-color: black;
+        }
+
+        #light-panel{
+            display: flex;
+            justify-content: center;
+            margin-top: 250px;
+        }
+
+        .light{
+            width: 100px;
+            height: 50px;
+            background-color: white;
+            border: 1px solid black;
+        }
+
+        .button-panel{
+            display: flex;
+            justify-content: center;
+            margin-top: 25px;
+        }
+
+        .button-panel button{
+            border: 5px solid green;
+            margin-right: 20px;
+        }
+    </style>
+</head>
+<body>
+    <section id="kit">
+
+    <section id="light-panel">
+        
+        <div class="light"></div>
+        <div class="light"></div>
+        <div class="light"></div>
+        <div class="light"></div>
+        <div class="light"></div>
+        <div class="light"></div>
+
+    </section>
+
+        <section class="button-panel" id="btn-panel">
+            <button id="start-btn" class="button">start</button>
+            <button id="end-btn" class="button">stop</button>
+        </section>
+    </section>
+
+    <script src="jquery-3.7.1.min.js"></script>
+
+    <script>
+        const light_count = 6;
+        let current_light = -1;
+        let direction = "RIGHT";
+        let intervlID ;
+
+        updateLight = () => {
+
+            if(direction==="RIGHT"){
+                current_light++;
+                $(".light").css("background","white");
+                $(".light").eq(current_light).css("background","red");
+                $(".light").eq(current_light-1).css("background","maroon");
+
+                if(current_light===light_count-1){
+                    direction="LEFT";
+                }
+
+             }else{
+
+                current_light--;
+                $(".light").css("background","white");
+                $(".light").eq(current_light).css("background","red");
+                $(".light").eq(current_light+1).css("background","maroon");
+
+                if(current_light==0){
+                    direction="RIGHT";
+                }
+
+             }
+        }
+        
+        $('#start-btn').on('click',function(){
+            intervlID = setInterval(updateLight, 100);
+        })
+
+        $('#end-btn').on('cilck',function(){
+            clearInterval(intervlID);
+        })
+
+    </script>
+</body>
+</html>
